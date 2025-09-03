@@ -1,4 +1,6 @@
 ﻿@inject NavigationManager navigationManager
+@inject VestaService ventaService
+<h2>@titulo</h2>
 <EditForm Model="oVenta" OnValidSubmit="@guardar">
     <DataAnnotationsValidator />
     <div class="mt-3">
@@ -10,11 +12,6 @@
         <label>Nombre</label>
         <InputText class="form-control" @bind-Value="oVenta.nombre" />
         <ValidationMessage For="@(() => oVenta.nombre)" />
-    </div>
-    <div class="mt-3">
-        <label>Edad</label>
-        <InputNumber class="form-control" @bind-Value="oVenta.edad" />
-        <ValidationMessage For="@(() => oVenta.edad)" />
     </div>
     <div class="mt-3">
         <label>Cargo</label>
@@ -37,18 +34,42 @@
         <ValidationMessage For="@(() => oVenta.venta)" />
     </div>
     <div class="mt-3">
-        <button type="submit" class="btn btn-success">  GUARDAR  </button>
-        <button @onclick="regresar"  class="btn btn-danger">  REGRESAR  </button>
+        <button type="submit" class="btn btn-success" @onclick="guardar">  GUARDAR  </button>
+        <button class="btn btn-danger" @onclick="Regresar">  REGRESAR </button>
     </div>
 </EditForm>
 @code {
     public Class1 oVenta { get; set; } = new Class1();
+    [Parameter]
+    public int idVenta { get; set; }
+    public string titulo { get; set; } = "";
     private void guardar()
     {
-        Console.WriteLine("GUARDANDO......");
+        if (titulo == "Agregar Venta")
+        {
+            ventaService.guardarVenta(oVenta);
+            navigationManager.NavigateTo("/formventa");
+        }
+        else
+        {
+            ventaService.editarVenta(oVenta);
+        }
     }
-    public void regresar()
+    private void Regresar()
     {
-        navigationManager.NavigateTo("/ventas");
+        navigationManager.NavigateTo("/formventa");
+    }
+    protected override Task OnInitializedAsync()
+    {
+        if (idVenta == 0)
+        {
+            titulo = "Agregar Venta";
+        }
+        else
+        {
+            titulo = "Editar Venta";
+            oVenta = ventaService.ResuperarIdVenta(idVenta);
+        }
+        return base.OnInitializedAsync();
     }
 }

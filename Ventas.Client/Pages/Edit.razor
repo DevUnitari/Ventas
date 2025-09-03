@@ -1,8 +1,7 @@
-﻿@page "/formlibro/edit/{numeroEmpleado}"
-<h3>Formulario de Edicion</h3>
-<FormVenta/>
+﻿@page "/formventa/editar/{numeroEmpleado}"
+
+<FormVenta idVenta="int.Parse(numeroEmpleado)"/>
 @code {
     [Parameter]
-    public string? numeroEmpleado { get; set; }
-
+    public string numeroEmpleado { get; set; } = null!;
 }
