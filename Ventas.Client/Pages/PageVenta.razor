@@ -14,6 +14,8 @@
                 <th>Fecha de Contrato</th>
                 <th>Cuotas</th>
                 <th>Ventas</th>
+                <th>Nombre de Sucursal</th>
+                <th>Nombre de Director</th>
                 <th class="table-danger">Opciones</th>
             </tr>
         </thead>
@@ -25,8 +27,10 @@
                     <td>@item.nombre</td>
                     <td>@item.cargo</td>
                     <td>@item.fechaContrato</td>
-                    <td>@item.cuota</td>
-                    <td>@item.venta</td>
+                    <td>@item.cuotas</td>
+                    <td>@item.ventas</td>
+                    <td>@item.nombreSucursal</td>
+                    <td>@item.nombreDIrector</td>
                     <td class="table-danger">
                         <button class="btn btn-primary" @onclick="(() => recuperarVenta(item.numeroEmpleado))">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">

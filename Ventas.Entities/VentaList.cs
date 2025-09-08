@@ -10,10 +10,11 @@ namespace Ventas.Entities
     {
         public int numeroEmpleado { get; set; }
         public string nombre { get; set; }
-        public int edad { get; set; }
-        public string? cargo { get; set; }
+        public string cargo { get; set; }
         public DateTime? fechaContrato { get; set; }
-        public double? cuota { get; set; }
-        public int? venta { get; set; }
+        public double? cuotas { get; set; }
+        public int? ventas { get; set; }
+        public string nombreSucursal { get; set; } = string.Empty;
+        public string nombreDIrector { get; set; } = string.Empty;
     }
 }
